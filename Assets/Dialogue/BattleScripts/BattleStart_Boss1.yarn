@@ -1,0 +1,15 @@
+﻿title: BattleStart_Boss1
+---
+자 줌인부터 구현하렴
+이게 줌인이란다.
+<<zoom_in>>
+보스가 승부를 걸어왔다!
+<<pause 1.5>>
+<<zoom_out>>
+
+<<fear_choice>>
+
+"공포를 선택했다. 전투를 시작한다!"
+<<run_command resume_battle>>
+
+===
