@@ -1,0 +1,7 @@
+﻿title: SkillUP
+---
+외국어 공부
+-> "외국어 능력이 1 올랐다!"
+	<<declare $ForeignLanguage = 0>>
+	<<set $ForeignLanguage += 1>>
+===

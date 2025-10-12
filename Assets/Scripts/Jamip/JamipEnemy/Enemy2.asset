@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0e675d13981aa045a2dd4f34f99d7c1, type: 3}
+  m_Name: Enemy2
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 6111737385963805000, guid: b5e688b9a5bdc3c4a97e860ca3a122ff, type: 3}
+  enemyName: "\uD604\uC11C"
+  role: "\uD6C8\uB828\uB3C4\uAC10 6\uD488"
+  hasItem: 0
+  canConnect: 1
+  isEssentialTarget: 1
+  isInvulnerable: 0
+  itemId: 
+  itemCount: 1
+  connectStepLimit: 10
+  fearOptions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  trueFear: {fileID: 11400000, guid: ad8c5bf0a0c179f44a1f0974f868b89b, type: 2}
+  fearHint: "\uACA8\uC6B0 \uC778\uC815\uBC1B\uC544\uC11C \uC5EC\uAE30\uAE4C\uC9C0
+    \uC654\uC5B4. \uAC00\uC871\uC744 \uC704\uD574\uC11C\uB77C\uB3C4 \uBB3C\uB7EC\uC11C\uC9C0
+    \uC54A\uACA0\uB2E4."

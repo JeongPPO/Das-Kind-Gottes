@@ -1,0 +1,25 @@
+﻿title: BattleStart_Boss1
+---
+<<character_sprite_anim "Hid_Intro" "Appear">>
+"히드가 전투에 등장한다!"
+<<character_sprite_show "Hid_Normal">>
+"히드가 평상시 표정으로 대화한다."
+<<character_sprite_show "Hid_Skill1">>
+"히드가 스킬1을 사용한다!"
+
+
+<<fear_choice>>
+
+자 줌인부터 구현하렴
+이게 줌인이란다.
+<<zoom_in>>
+보스가 승부를 걸어왔다!
+<<pause 1.5>>
+<<zoom_out>>
+
+<<fear_choice>>
+
+"공포를 선택했다. 전투를 시작한다!"
+<<run_command resume_battle>>
+
+===
