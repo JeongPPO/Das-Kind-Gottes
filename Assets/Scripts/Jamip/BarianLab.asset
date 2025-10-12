@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc47f77e97db1d49b3826334d33fe2c, type: 3}
+  m_Name: BarianLab
+  m_EditorClassIdentifier: 
+  segments:
+  - name: 
+    direction: 2
+    progressCells: 30
+    lanes: 5
+    playerStartLane: 0
+    cameraScrollSpeed: 1
+    failMargin: 2
+    isFinalSegment: 0
+    sharePivotWithPrevious: 0
+    overlapCells: 0
+    startGrid: {x: 0, y: 0}
+    endGrid: {x: 4, y: 29}
+    playerStartGrid: {x: 0, y: 0}
+    worldStartGrid: {x: 0, y: 0}
+    worldEndGrid: {x: 4, y: 29}
+    tileSize: 2

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b56b9e30c3236b458a4351fb72eb514, type: 3}
+  m_Name: Hospital
+  m_EditorClassIdentifier: 
+  id: Hospital
+  locationName: "\uBCD1\uC6D0"
+  icon: {fileID: -7024703341269732018, guid: 533c5d66d883495449b7702b0a3a4253, type: 3}
+  anchorX: -10.39
+  anchorY: 4.71
+  sceneName: MapUI_Taria
+  yarnNode: 
+  interactables: []

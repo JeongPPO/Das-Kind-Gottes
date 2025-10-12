@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4b11440a62b9614d983f064177d0256, type: 3}
+  m_Name: HideBronze2
+  m_EditorClassIdentifier: 
+  keyName: "\uD615\uC81C\uC758 \uC874\uC7AC"
+  description: "\uD615\uC81C\uAC00 \uC788\uB294 \uB4EF\uD558\uB2E4. "
+  icon: {fileID: -4193479205527018975, guid: 6e20c37cd8248914c80fd41e870e61a0, type: 3}

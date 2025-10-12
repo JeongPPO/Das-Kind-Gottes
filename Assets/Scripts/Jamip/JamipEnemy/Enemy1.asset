@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0e675d13981aa045a2dd4f34f99d7c1, type: 3}
+  m_Name: Enemy1
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8040736951756705926, guid: e62023dd220189744a70453125d42dd3, type: 3}
+  enemyName: "\uC2DC\uC6B0"
+  role: 
+  hasItem: 1
+  canConnect: 1
+  isEssentialTarget: 0
+  isInvulnerable: 0
+  itemId: USB
+  itemCount: 1
+  connectStepLimit: 8
+  fearOptions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  trueFear: {fileID: 11400000, guid: ad03c3d5cdcb7364c85b33b5c06eccf3, type: 2}
+  fearHint: "\uB098\uB294 \uC774 \uC9C1\uC5C5\uC774 \uC544\uB2C8\uBA74 \uAC00\uC871\uB4E4\uC744
+    \uBA39\uC5EC\uC0B4\uB9AC\uAE30 \uD798\uB4E4\uC5B4."

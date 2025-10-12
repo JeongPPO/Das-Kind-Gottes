@@ -1,0 +1,16 @@
+﻿title: Introduction
+---
+안녕?
+-> 뭐야? 네 놈은
+	<<set $용기 = 10>>
+-> 안녕하세요오... 
+	<<set $용기 = 0>>
+
+<<if $용기 >= 10>>
+	너 정말 싸가지가 없구나?
+<<else>>
+	예의바른 아이구나.
+<<endif>>
+
+<<jump StartofEverything>>
+===
