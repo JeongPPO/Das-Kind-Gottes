@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Yarn.Unity;
+using static Unity.Collections.Unicode;
 public class MapManager : MonoBehaviour
 {
     [Header("Map Settings")]
@@ -21,8 +22,13 @@ public class MapManager : MonoBehaviour
     {
         if (currentMap != null)
         {
+            foreach (var loc in currentMap.locations)
+            {
+                loc.isVisited = false;
+            }
             LoadMap(currentMap);
         }
+
     }
 
     public void LoadMap(MapData mapData)
@@ -69,77 +75,129 @@ public class MapManager : MonoBehaviour
 
     void OnLocationClicked(LocationData loc)
     {
-        // MapPanel 끄기
-        mapPanel.gameObject.SetActive(false);
+        var runner = Object.FindFirstObjectByType<DialogueRunner>();
 
-        Debug.Log($"Clicked: {loc.locationName}, looking for panel: {loc.sceneName}");
-        Transform internalPanel = internalPanelsParent.Find(loc.sceneName);
-        if (internalPanel == null)
-            Debug.LogWarning("Internal panel not found!");
+        // 패널 전환 로직 실행
+        SwitchPanel(loc);
 
-        if (internalPanel != null)
+        if (runner == null)
         {
-            // 모든 자식 Panel 비활성화 (관리 편의)
-            foreach (Transform child in internalPanelsParent)
-                child.gameObject.SetActive(false);
+            Debug.LogError("DialogueRunner를 찾을 수 없습니다!");
+            return;
+        }
 
-            // 선택한 Panel 활성화
-            internalPanel.gameObject.SetActive(true);
+        // 1. 어떤 노드를 실행할지 결정 (방문 여부에 따른 분기)
+        string nodeToRun = "";
+        if (!loc.isVisited && !string.IsNullOrEmpty(loc.firstVisitYarnNode))
+        {
+            nodeToRun = loc.firstVisitYarnNode;
+            loc.isVisited = true; // 첫 방문 처리
+            Debug.Log($"[MapManager] 첫 방문입니다. 노드 실행: {nodeToRun}");
+        }
+        else if (!string.IsNullOrEmpty(loc.yarnNode))
+        {
+            nodeToRun = loc.yarnNode;
+            Debug.Log($"[MapManager] 재방문입니다. 노드 실행: {nodeToRun}");
+        }
 
-            // 내부 버튼 연결
-            InternalPanelSetup(internalPanel, loc);
+        // 2. Yarn Dialogue 실행 (결정된 nodeToRun이 있을 때만)
+        if (!string.IsNullOrEmpty(nodeToRun))
+        {
+            if (runner.IsDialogueRunning)
+            {
+                runner.Stop();
+            }
+
+            try
+            {
+                runner.StartDialogue(nodeToRun);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning($"[MapManager] 대화 시작 오류: {e.Message}");
+            }
         }
         else
         {
-            Debug.LogWarning($"Internal panel '{loc.sceneName}'을 찾을 수 없습니다.");
+            Debug.Log("[MapManager] 실행할 노드가 없어 대화를 스킵합니다.");
         }
 
-        // Yarn Dialogue 실행
-        if (!string.IsNullOrEmpty(loc.yarnNode))
+        // 3. 패널 전환 로직
+        void SwitchPanel(LocationData loc)
         {
-            var runner = Object.FindFirstObjectByType<DialogueRunner>();
-            if (runner != null)
-                runner.StartDialogue(loc.yarnNode);
-        }
-    }
-
-    void InternalPanelSetup(Transform panel, LocationData loc)
-    {
-        // 내부 사물 버튼과 연결
-        foreach (var interactable in loc.interactables)
-        {
-            Transform objBtn = panel.Find(interactable.objectName);
-            if (objBtn != null)
+            // [중요 수정] Transform.Find 대신 이 방식을 사용하세요.
+            // 비활성화된 자식까지 포함해서 이름을 검색합니다.
+            Transform targetPanel = null;
+            foreach (Transform child in internalPanelsParent)
             {
-                Button btn = objBtn.GetComponent<Button>();
+                if (child.name == loc.sceneName)
+                {
+                    targetPanel = child;
+                    break;
+                }
+            }
+
+            if (targetPanel != null)
+            {
+                // 1. 모든 자식 Panel 비활성화
+                foreach (Transform child in internalPanelsParent)
+                {
+                    child.gameObject.SetActive(false);
+                }
+
+                // 2. 선택한 Panel 활성화 (이제 Inactive 상태였어도 확실히 켭니다)
+                targetPanel.gameObject.SetActive(true);
+                Debug.Log($"[MapManager] '{loc.sceneName}' 전환 성공!");
+
+                if (loc.sceneName != "MapUI_Taria")
+                {
+                    InternalPanelSetup(targetPanel, loc);
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"[MapManager] 패널 '{loc.sceneName}'을 찾을 수 없습니다. (이름 오타 확인 필수)");
+            }
+        }
+
+        void InternalPanelSetup(Transform panel, LocationData loc)
+        {
+            // 내부 사물 버튼과 연결
+            foreach (var interactable in loc.interactables)
+            {
+                Transform objBtn = panel.Find(interactable.objectName);
+                if (objBtn != null)
+                {
+                    Button btn = objBtn.GetComponent<Button>();
+                    if (btn != null)
+                    {
+                        btn.onClick.RemoveAllListeners();
+                        btn.onClick.AddListener(() =>
+                        {
+                            var runner = Object.FindFirstObjectByType<DialogueRunner>();
+                            if (runner != null && !string.IsNullOrEmpty(interactable.yarnNode))
+                            {
+                                runner.StartDialogue(interactable.yarnNode);
+                            }
+                        });
+                    }
+                }
+            }
+
+            // "ExitButton" 처리
+            Transform exitBtn = panel.Find("ExitButton");
+            if (exitBtn != null)
+            {
+                Button btn = exitBtn.GetComponent<Button>();
                 if (btn != null)
                 {
                     btn.onClick.RemoveAllListeners();
                     btn.onClick.AddListener(() =>
                     {
-                        var runner = Object.FindFirstObjectByType<DialogueRunner>();
-                        if (runner != null && !string.IsNullOrEmpty(interactable.yarnNode))
-                        {
-                            runner.StartDialogue(interactable.yarnNode);
-                        }
+                        panel.gameObject.SetActive(false);
+                        mapPanel.gameObject.SetActive(true);
                     });
                 }
-            }
-        }
-
-        // "ExitButton" 처리
-        Transform exitBtn = panel.Find("ExitButton");
-        if (exitBtn != null)
-        {
-            Button btn = exitBtn.GetComponent<Button>();
-            if (btn != null)
-            {
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(() =>
-                {
-                    panel.gameObject.SetActive(false);
-                    mapPanel.gameObject.SetActive(true);
-                });
             }
         }
     }

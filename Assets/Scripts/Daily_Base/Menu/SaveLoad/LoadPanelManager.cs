@@ -16,25 +16,62 @@ public class LoadPanelManager : MonoBehaviour
     public Transform contentParent;
     public int maxSlots = 10;
 
+    [Header("External Buttons")]
+    public Button openButton;
+
     private List<SaveSlotUI> slotUIs = new List<SaveSlotUI>();
 
     void Start()
     {
-        closeButton.onClick.AddListener(() => loadPanel.SetActive(false));
-
-        // 슬롯 생성
-        for (int i = 0; i < maxSlots; i++)
+        // 닫기 버튼 리스너 (람다식 사용)
+        if (closeButton != null)
         {
-            GameObject slotObj = Instantiate(slotPrefab, contentParent);
-            SaveSlotUI slotUI = slotObj.GetComponent<SaveSlotUI>();
-            int index = i;
+            closeButton.onClick.AddListener(ClosePanel);
+        }
 
-            slotUI.Initialize(index, OnSlotClicked);
+        // 처음에는 패널을 꺼둠
+        if (loadPanel != null)
+        {
+            loadPanel.SetActive(false);
+        }
 
+        // 슬롯 생성 및 초기화 로직 (기존 코드 유지)
+        RefreshSlots();
+    }
+
+    void Update()
+    {
+        if (loadPanel.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+        {
+            ClosePanel();
+        }
+    }
+
+    // 슬롯 정보를 최신화하는 함수를 별도로 빼두면 관리하기 편합니다.
+    public void RefreshSlots()
+    {
+        // 이미 생성된 슬롯이 있다면 정보를 다시 불러옴
+        for (int i = 0; i < slotUIs.Count; i++)
+        {
             SaveData data = LoadSaveSlot(i);
-            slotUI.SetSlotInfo(data);
+            slotUIs[i].SetSlotInfo(data);
+        }
+    }
 
-            slotUIs.Add(slotUI);
+    public void OpenPanel()
+    {
+        if (loadPanel != null)
+        {
+            RefreshSlots(); // 열 때마다 최신 저장 목록 갱신
+            loadPanel.SetActive(true);
+        }
+    }
+
+    public void ClosePanel()
+    {
+        if (loadPanel != null)
+        {
+            loadPanel.SetActive(false);
         }
     }
 
@@ -57,16 +94,15 @@ public class LoadPanelManager : MonoBehaviour
     {
         SaveData data = LoadSaveSlot(slotIndex);
 
-        if (data.playTime == 0f && data.date == "Empty Slot")
-        {
-            Debug.Log($"Slot {slotIndex + 1} is empty, cannot load.");
-            return;
-        }
+        if (data.date == "Empty Slot") return;
 
+        // GameManager에 데이터 전달
         GameManager.Instance.SetLoadedData(data);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Daily");
+
+        // 저장된 씬 이름이 있다면 그 씬으로, 없다면 기본값(Daily)으로 이동
+        string targetScene = string.IsNullOrEmpty(data.sceneName) ? "Daily" : data.sceneName;
+
+        Debug.Log($"{targetScene} 씬으로 로딩합니다.");
+        SceneManager.LoadScene(targetScene);
     }
-
-
-    public void OpenPanel() => loadPanel.SetActive(true);
 }

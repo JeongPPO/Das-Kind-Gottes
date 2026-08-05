@@ -30,7 +30,7 @@ public class YarnCommands : MonoBehaviour
     }
 
     [YarnCommand("character_sprite_anim")]
-    public void ShowCharacterSpriteAnim(string spriteName, string animTrigger)
+    public static void ShowCharacterSpriteAnim(string spriteName, string animTrigger)
     {
         var spriteManager = FindFirstObjectByType<CharacterSpriteManager>();
         if (spriteManager != null)

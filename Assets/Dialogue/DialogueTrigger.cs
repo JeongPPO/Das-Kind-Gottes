@@ -1,28 +1,23 @@
 using UnityEngine;
 using Yarn.Unity;
+using System.Collections;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public DialogueRunner dialogueRunner;   // Inspector에서 연결하거나 GetComponent로 찾기
-    public string startNode = "Introduction";      // 시작할 노드 이름
+    public DialogueRunner dialogueRunner;
+    public string startNode = "StartofEverything";
 
-    void Start()
+    IEnumerator Start()
     {
-        if (dialogueRunner != null)
-        {
-            dialogueRunner.StartDialogue(startNode);
-        }
-        else
-        {
-            Debug.LogError("DialogueRunner not assigned!");
-        }
-    }
+        // DialogueRunner가 초기화될 시간을 1프레임 줍니다.
+        yield return null; 
 
-    // 트리거 방식으로 하고 싶다면 이런 식도 가능
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        if (dialogueRunner != null && !string.IsNullOrEmpty(startNode))
         {
+            if (dialogueRunner.IsDialogueRunning)
+            {
+                dialogueRunner.Stop();
+            }
             dialogueRunner.StartDialogue(startNode);
         }
     }

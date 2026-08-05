@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 237183efcccc9c841b64e2fc9f30134e, type: 3}
+  m_Name: S1
+  m_EditorClassIdentifier: 
+  characterId: S1
+  displayName: "\uC815\uC2DC\uC6B0"
+  portrait: {fileID: -8634684184958176500, guid: fc73c2957de6a844690205fcbca1cf11, type: 3}
+  role: 1
+  providedSkills:
+  - {fileID: 0}
+  - {fileID: 0}
+  roleSlotPrimary: {fileID: 0}
+  roleSlotSecondary: {fileID: 0}

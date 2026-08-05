@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
     public bool isLethalOnHit = false;  // 즉사 여부
     public bool canHeal = true;         // 회복 가능 여부
     private float damageReduction = 0f; // 0~1 값 (0.1 = 10% 감소)
+    private bool isInvincible = false;
 
     IEnumerator Start()
     {
@@ -32,6 +33,12 @@ public class PlayerHealth : MonoBehaviour
     /// 피해 처리
     public void TakeDamage(float amount)
     {
+        if (isInvincible)
+        {
+            Debug.Log("[PlayerHealth] 무적 상태이므로 피해를 입지 않습니다.");
+            return;
+        }
+
         if (isLethalOnHit)
         {
             Debug.Log("[PlayerHealth] 즉사 디버프 적용됨! 플레이어 사망");
@@ -94,10 +101,47 @@ public class PlayerHealth : MonoBehaviour
         uiController.UpdateHearts(currentHealth, playerData.currentMaxHP);
     }
 
-    /// 사망 처리
+    public void SetInvincible(float duration)
+    {
+        StartCoroutine(InvincibleRoutine(duration));
+    }
+
+    private IEnumerator InvincibleRoutine(float duration)
+    {
+        isInvincible = true;
+        float elapsed = 0f;
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        Color originalColor = sr.color;
+
+        while (elapsed < duration)
+        {
+            // 깜빡임 연출 (알파값 조절)
+            sr.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0.3f);
+            yield return new WaitForSeconds(0.1f);
+            sr.color = originalColor;
+            yield return new WaitForSeconds(0.1f);
+
+            elapsed += 0.2f;
+        }
+
+        sr.color = originalColor;
+        isInvincible = false;
+    }
+
     private void Die()
     {
         Debug.Log("[PlayerHealth] 플레이어 사망 처리");
-        // 죽음 처리 로직 (애니메이션, 게임 오버 등)
+
+        // LifeManager가 붙어있는지 확인하고 사망 로직 실행
+        var lifeManager = GetComponent<InfiltrationPlayerLifeManager>();
+        if (lifeManager != null)
+        {
+            lifeManager.HandleDeath();
+        }
+        else
+        {
+            // 잠입 씬이 아닌 일반 씬에서의 기본 사망 처리
+            // 예: 씬 재시작 등
+        }
     }
 }

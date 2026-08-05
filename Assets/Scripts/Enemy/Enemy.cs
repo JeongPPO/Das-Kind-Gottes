@@ -1,4 +1,5 @@
 using UnityEngine;
+using Yarn.Unity;
 
 public class Enemy : MonoBehaviour, IDamageable
 {

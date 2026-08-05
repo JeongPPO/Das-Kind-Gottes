@@ -24,8 +24,18 @@ public class LocationData : ScriptableObject
 
     [Header("씬/패널 전환")]
     public string sceneName;    // 내부 Panel 이름과 맞춤
-    public string yarnNode;     // 장소 입장 시 Yarn 노드
+    public string firstVisitYarnNode; // 첫 방문용 노드
+    public string yarnNode;           // 일반 방문용 노드 (비워두면 실행 안 함)
+    public bool isVisited;            // 방문 여부 저장
 
     [Header("내부 상호작용")]
     public List<InteractableObjectData> interactables = new List<InteractableObjectData>();
+#if UNITY_EDITOR
+    private void OnEnable()
+    {
+        // 개발 중 Play 버튼 누를 때마다 초기화되어 편리함!
+        isVisited = false;
+    }
+#endif
+
 }
