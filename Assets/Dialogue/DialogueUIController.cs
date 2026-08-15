@@ -17,6 +17,10 @@ public class DialogueUIController : MonoBehaviour
     [SerializeField] private List<Sprite> portraitSprites;
     [SerializeField] private List<Sprite> backgroundSprites;
 
+    [Header("Boss Animation")]
+    [SerializeField] private Animator bossAnimator; // 보스 전용 Animator (인스펙터에서 연결)
+    [SerializeField] private GameObject bossAnimationObject; // Animator가 붙은 오브젝트 (활성화/비활성화용, bossAnimator와 동일 오브젝트면 생략 가능)
+
     private Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
 
     void Awake()
@@ -91,6 +95,39 @@ public class DialogueUIController : MonoBehaviour
     {
         leftImage.color = (speakingSide == "left") ? Color.white : Color.gray;
         rightImage.color = (speakingSide == "right") ? Color.white : Color.gray;
+    }
+
+    [YarnCommand("character_sprite_show")]
+    public static void ShowBossAnimation(string animName)
+    {
+        var controller = GameObject.FindFirstObjectByType<DialogueUIController>();
+
+        if (controller != null)
+        {
+            controller.ExecuteBossAnimation(animName);
+        }
+        else
+        {
+            Debug.LogError("씬에서 DialogueUIController 오브젝트를 찾을 수 없습니다!");
+        }
+    }
+
+    // 실제 애니메이션 재생 로직
+    private void ExecuteBossAnimation(string animName)
+    {
+        if (bossAnimator == null)
+        {
+            Debug.LogWarning("[Dialogue] bossAnimator가 연결되어 있지 않습니다.");
+            return;
+        }
+
+        if (bossAnimationObject != null && !bossAnimationObject.activeSelf)
+        {
+            bossAnimationObject.SetActive(true);
+        }
+
+        // animName은 Animator Controller 안의 State 이름과 정확히 일치해야 합니다.
+        bossAnimator.Play(animName);
     }
 
     // 2. 캐릭터 이미지 숨기기 커맨드

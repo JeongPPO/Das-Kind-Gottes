@@ -14,7 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterId: A1
   displayName: "\uC2E0\uC11C\uC6D4"
-  portrait: {fileID: 21300000, guid: a60217e1ca9301042abe7b6dbaa46d2f, type: 3}
+  defaultPortrait: {fileID: 21300000, guid: 5153a0fe923c6914bbebf3a7dbf17687, type: 3}
+  emotions:
+  - state: 0
+    sprite: {fileID: 21300000, guid: 5153a0fe923c6914bbebf3a7dbf17687, type: 3}
+  - state: 1
+    sprite: {fileID: 21300000, guid: 55c0d295a6fca0c4fae54136bd146329, type: 3}
+  - state: 2
+    sprite: {fileID: 21300000, guid: a60217e1ca9301042abe7b6dbaa46d2f, type: 3}
+  - state: 3
+    sprite: {fileID: 21300000, guid: e1984ec0ff76fb241a280a657ea687a2, type: 3}
+  portrait: {fileID: 21300000, guid: 5153a0fe923c6914bbebf3a7dbf17687, type: 3}
   role: 0
   providedSkills:
   - {fileID: 11400000, guid: 3b60ffcb552dddf46accf81cf82529b4, type: 2}

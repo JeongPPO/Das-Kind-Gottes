@@ -19,6 +19,6 @@ MonoBehaviour:
   damageThresholdForMonsterMode: 30
   maxHealth: 300
   enemyPrefab: {fileID: 1931233194043854530, guid: 4abadc242aa7fe143aa129b102f9ce57, type: 3}
-  yarnNodeName: BattleStart
+  yarnNodeName: BattleStart_Boss1
   returnSceneName: Battle
   returnPlayerPosition: {x: 0, y: 0, z: 0}

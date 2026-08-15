@@ -22,4 +22,8 @@ public class EnemyData : ScriptableObject
     public string yarnNodeName;
     public string returnSceneName;
     public Vector3 returnPlayerPosition;
+
+    [Header("배틀 그리드 크기")]
+    [Range(3, 8)] public int gridWidth = 3;
+    [Range(3, 8)] public int gridHeight = 3;
 }

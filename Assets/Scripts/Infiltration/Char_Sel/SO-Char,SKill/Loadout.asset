@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b5867d71a329fe4494b79c0489b0b11, type: 3}
   m_Name: Loadout
   m_EditorClassIdentifier: 
+  attacker: {fileID: 11400000, guid: c007ab186aca0934d892ac864c7099b0, type: 2}
+  supporter: {fileID: 11400000, guid: c55885e6be2064e4698a4df3f39a843f, type: 2}
+  thief: {fileID: 11400000, guid: 265ccc01321853b49a84fafb627b8f0b, type: 2}
+  healer: {fileID: 11400000, guid: 5c090da31fe766c43a179dcbaf37d818, type: 2}
   A_Tap: {fileID: 11400000, guid: 3b60ffcb552dddf46accf81cf82529b4, type: 2}
   A_Hold: {fileID: 11400000, guid: 3b60ffcb552dddf46accf81cf82529b4, type: 2}
   S_Tap: {fileID: 11400000, guid: 3b60ffcb552dddf46accf81cf82529b4, type: 2}

@@ -23,11 +23,11 @@ MonoBehaviour:
   itemCount: 1
   connectStepLimit: 8
   fearOptions:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: ad03c3d5cdcb7364c85b33b5c06eccf3, type: 2}
+  - {fileID: 11400000, guid: 7677181630b7cdf48ad7397406ac691d, type: 2}
+  - {fileID: 11400000, guid: 7756ec6a4df2b324db42435f31f50c0b, type: 2}
+  - {fileID: 11400000, guid: 8ceda6c3aad1e0b48af2a6961eaf18b2, type: 2}
+  - {fileID: 11400000, guid: ad8c5bf0a0c179f44a1f0974f868b89b, type: 2}
   trueFear: {fileID: 11400000, guid: ad03c3d5cdcb7364c85b33b5c06eccf3, type: 2}
   fearHint: "\uB098\uB294 \uC774 \uC9C1\uC5C5\uC774 \uC544\uB2C8\uBA74 \uAC00\uC871\uB4E4\uC744
     \uBA39\uC5EC\uC0B4\uB9AC\uAE30 \uD798\uB4E4\uC5B4."

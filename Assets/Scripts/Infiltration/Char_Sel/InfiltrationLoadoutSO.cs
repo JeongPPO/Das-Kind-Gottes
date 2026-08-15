@@ -4,6 +4,23 @@ using Infiltration;
 [CreateAssetMenu(fileName = "Loadout", menuName = "Infiltration/Loadout")]
 public class InfiltrationLoadoutSO : ScriptableObject
 {
+    public InfiltrationCharacterSO attacker;
+    public InfiltrationCharacterSO supporter;
+    public InfiltrationCharacterSO thief;
+    public InfiltrationCharacterSO healer;
+
+    public InfiltrationCharacterSO GetCharacterByRole(RoleType role)
+    {
+        return role switch
+        {
+            RoleType.Attacker => attacker,
+            RoleType.Supporter => supporter,
+            RoleType.Thief => thief,
+            RoleType.Healer => healer,
+            _ => null
+        };
+    }
+
     [Header("Slots")]
     public InfiltrationSkillSO A_Tap;
     public InfiltrationSkillSO A_Hold;

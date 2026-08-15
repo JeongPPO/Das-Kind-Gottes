@@ -14,10 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterId: S1
   displayName: "\uC815\uC2DC\uC6B0"
+  defaultPortrait: {fileID: 21300000, guid: fa34a4655eacbe3409e701be27f824c7, type: 3}
+  emotions:
+  - state: 0
+    sprite: {fileID: 21300000, guid: fa34a4655eacbe3409e701be27f824c7, type: 3}
+  - state: 1
+    sprite: {fileID: 21300000, guid: 3e2fd28156bad86448c3bbc06f5cd282, type: 3}
+  - state: 2
+    sprite: {fileID: 21300000, guid: 9e9d3ef75eb5d2d4eab45feeef4127cd, type: 3}
+  - state: 3
+    sprite: {fileID: 21300000, guid: fa34a4655eacbe3409e701be27f824c7, type: 3}
   portrait: {fileID: -8634684184958176500, guid: fc73c2957de6a844690205fcbca1cf11, type: 3}
   role: 1
   providedSkills:
-  - {fileID: 0}
-  - {fileID: 0}
-  roleSlotPrimary: {fileID: 0}
-  roleSlotSecondary: {fileID: 0}
+  - {fileID: 11400000, guid: 3b60ffcb552dddf46accf81cf82529b4, type: 2}
+  - {fileID: 11400000, guid: 3b60ffcb552dddf46accf81cf82529b4, type: 2}
+  roleSlotPrimary: {fileID: 11400000, guid: 3b60ffcb552dddf46accf81cf82529b4, type: 2}
+  roleSlotSecondary: {fileID: 11400000, guid: 3b60ffcb552dddf46accf81cf82529b4, type: 2}

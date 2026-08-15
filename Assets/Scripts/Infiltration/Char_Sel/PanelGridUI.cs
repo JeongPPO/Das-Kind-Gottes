@@ -13,7 +13,7 @@ public class PanelGridUI : MonoBehaviour
     // 내부 상태
     private InfiltrationLoadoutSO workingLoadout;
     private InfiltrationCharacterSelectUI ownerUI;
-    private RoleType currentRole; // ★ 어떤 직군 그리드를 열었는지 저장
+    private RoleType currentRole; // 직군별 그리드 저장
 
     private readonly List<GameObject> spawned = new List<GameObject>();
 
@@ -66,13 +66,10 @@ public class PanelGridUI : MonoBehaviour
 
     void OnCharacterClicked(InfiltrationCharacterSO ch)
     {
-        // 직군 규칙에 따라 2개 슬롯 자동 채움
+        // 캐릭터 본체 + 스킬 슬롯을 위 통합 함수 하나로 모두 처리
         InfiltrationSlotRules.ApplyCharacterToLoadout(ch, workingLoadout);
 
-        // ★ 대표 슬롯 갱신 요청(직군과 선택 캐릭터 전달)
         ownerUI?.OnCharacterSelected(currentRole, ch);
-
-        // 패널 닫기
         Close();
     }
 

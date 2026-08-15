@@ -18,6 +18,10 @@ public class InfiltrationCharacterSelectUI : MonoBehaviour
     [Header("패널 참조")]
     public PanelGridUI gridPanel;
 
+    [Header("패널 전환 제어")]
+    [SerializeField] private GameObject characterSelectPanel; // CharacterSelect_Panel 연결
+    [SerializeField] private GameObject battleHUDPanel;
+
     [System.Serializable]
     public class RolePortraitSlot
     {
@@ -43,6 +47,7 @@ public class InfiltrationCharacterSelectUI : MonoBehaviour
         ApplyDefault(healerSlot);
     }
 
+
     // ▼ 대표 버튼에서 호출
     public void OpenAttackerGrid()  => gridPanel.OpenGrid(attackers,  workingLoadout, this, RoleType.Attacker);
     public void OpenSupporterGrid() => gridPanel.OpenGrid(supporters, workingLoadout, this, RoleType.Supporter);
@@ -66,7 +71,7 @@ public class InfiltrationCharacterSelectUI : MonoBehaviour
         if (slot == null) return;
         if (ch != null)
         {
-            if (slot.portraitImage) slot.portraitImage.sprite = ch.portrait;
+            if (slot.portraitImage) slot.portraitImage.sprite = ch.GetSprite(EmotionState.Selected);
             if (slot.nameText) slot.nameText.text = ch.displayName;
         }
         else
@@ -87,5 +92,23 @@ public class InfiltrationCharacterSelectUI : MonoBehaviour
         var holder = InfiltrationLoadoutRuntime.Instance;
         if (holder != null) holder.SetLoadout(workingLoadout);
         Debug.Log("<SelectUI> 로드아웃 저장 완료");
+        if (gridPanel != null) gridPanel.Close();
+
+        if (characterSelectPanel != null)
+            characterSelectPanel.SetActive(false);
+        else
+            gameObject.SetActive(false); // 스크립트가 선택 패널 자체에 붙어있는 경우
+
+        // 3. [전투 UI 켜기 및 동기화]
+        if (battleHUDPanel != null)
+        {
+            battleHUDPanel.SetActive(true);
+        }
+
+        // 4. [배틀 포트레잇 갱신] 배틀 매니저에 방금 저장된 데이터로 즉시 초기화 요청
+        if (BattlePortraitManager.Instance != null)
+        {
+            BattlePortraitManager.Instance.InitAllSlots();
+        }
     }
 }

@@ -52,7 +52,7 @@ public class InfiltrationPlayerController : MonoBehaviour
         currentGrid = (grid != null) ? grid.WorldToGrid(transform.position) : Vector2Int.zero;
 
         if (loadout == null && InfiltrationLoadoutRuntime.Instance != null)
-            loadout = InfiltrationLoadoutRuntime.Instance.currentLoadout;
+            loadout = InfiltrationLoadoutRuntime.Instance.CurrentLoadout;
 
         SnapToGrid(currentGrid);
 
